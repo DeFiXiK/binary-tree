@@ -1,4 +1,4 @@
-package main
+package btree
 
 import "testing"
 
@@ -31,7 +31,7 @@ func TestInsertValue(t *testing.T) {
 	tree := Create()
 	tree = tree.InsertValue(2)
 	if tree.Value != 2 {
-
+		t.Errorf("Значение в правом потомке не совпадает ожидалось: %v, получено: %v ", 2, tree.Value)
 	}
 	tree = tree.InsertValue(3)
 	if tree.Right.Value != 3 {

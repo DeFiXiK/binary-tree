@@ -1,4 +1,4 @@
-package main
+package btree
 
 import "fmt"
 
@@ -55,12 +55,10 @@ func (t *Tree) InOrdered() {
 }
 
 func main() {
-	tree := &Tree{nil, 8, nil}
-	tree.InsertValue(4)
-	tree.InsertValue(2)
-	tree.InsertValue(3)
-	tree.InsertValue(10)
-	tree.InsertValue(6)
-	tree.InsertValue(7)
-	tree.InOrdered()
+	v := []int{8, 4, 2, 3, 10, 6, 7}
+	tr := Create()
+	for i := range v {
+		tr = tr.InsertValue(v[i])
+	}
+	tr.InOrdered()
 }
