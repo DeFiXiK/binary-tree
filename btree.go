@@ -9,28 +9,28 @@ type Tree struct {
 	Right *Tree
 }
 
-// Create - инициализирует пустое дерево
+// Create - инициализирует пустое дерево.
 func Create() *Tree {
 	return nil
 }
 
-// Found - функция которая осуществляет поиск заданного значения
-// если значение не найдено, возвращает 0.
-func (t *Tree) Found(v int) int {
+// Find - функция которая проверяет наличие заданного значения
+// если значение найдено то возвращает true, иначе false.
+func (t *Tree) Find(v int) bool {
 	if t == nil {
-		return 0
+		return false
 	}
 	if v != t.Value {
 		if v < t.Value {
-			return t.Left.Found(v)
+			return t.Left.Find(v)
 		}
-		return t.Right.Found(v)
+		return t.Right.Find(v)
 	}
-	return t.Value
+	return true
 }
 
 // InsertValue - добавляет лист к дереву,
-// либо создает дерево с заданным элементом в корне если оно пустое
+// либо создает дерево с заданным элементом в корне если оно пустое.
 func (t *Tree) InsertValue(v int) *Tree {
 	if t == nil {
 		return &Tree{nil, v, nil}
@@ -44,7 +44,7 @@ func (t *Tree) InsertValue(v int) *Tree {
 }
 
 // InOrdered - префиксный обход дерева:
-// левое поддерево, корень, правое поддерево
+// левое поддерево, корень, правое поддерево.
 func (t *Tree) InOrdered() {
 	if t == nil {
 		return

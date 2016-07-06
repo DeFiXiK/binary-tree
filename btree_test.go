@@ -5,15 +5,15 @@ import "testing"
 func TestFound(t *testing.T) {
 	v := []int{8, 4, 2, 3, 10, 6, 7}
 	tr := &Tree{nil, v[0], nil}
-	if v[0] != tr.Found(v[0]) {
+	if !tr.Find(v[0]) {
 		t.Error("Значение в корне не найдено")
 	}
 	tr.Left = &Tree{nil, v[1], nil}
-	if v[1] != tr.Found(v[1]) {
+	if !tr.Find(v[1]) {
 		t.Error("Значение левого потомка не найдено")
 	}
 	tr.Right = &Tree{nil, v[4], nil}
-	if v[4] != tr.Found(v[4]) {
+	if !tr.Find(v[4]) {
 		t.Error("Значение правого потомка не найдено")
 	}
 	tr = Create()
@@ -21,7 +21,7 @@ func TestFound(t *testing.T) {
 		tr = tr.InsertValue(v[i])
 	}
 	for i := range v {
-		if tr.Found(v[i]) == 0 {
+		if !tr.Find(v[i]) {
 			t.Errorf("Значение %v - не найдено", v[i])
 		}
 	}
