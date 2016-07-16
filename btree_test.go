@@ -57,6 +57,6 @@ func TestMin(t *testing.T) {
 	v := []int{8, 4, 2, 3, 10, 6, 7}
 	tree = tree.InsertValues(v)
 	if tree.Min() != 2 {
-		t.Errorf("Минимальный элемент найден не верно ожидалось: %v, получено: %v\n", 5, tree.Min())
+		t.Errorf("Минимальный элемент найден не верно ожидалось: %v, получено: %v\n", 2, tree.Min())
 	}
 }
