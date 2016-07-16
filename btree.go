@@ -43,7 +43,7 @@ func (t *Tree) InsertValue(v int) *Tree {
 	return t
 }
 
-// InOrdered - префиксный обход дерева:
+// InOrdered - инфиксный обход:
 // левое поддерево, корень, правое поддерево.
 func (t *Tree) InOrdered() {
 	if t == nil {
@@ -54,11 +54,75 @@ func (t *Tree) InOrdered() {
 	t.Right.InOrdered()
 }
 
+// PreOrder - префиксный обход дерева:
+// левое поддерево, корень, правое поддерево.
+func (t *Tree) PreOrder() {
+	if t == nil {
+		return
+	}
+	fmt.Printf("%v ", t.Value)
+	t.Left.PreOrder()
+	t.Right.PreOrder()
+}
+
+// Min - находит минимальный элемент в дереве
+func (t *Tree) Min() int {
+	if t.Left == nil {
+		return t.Value
+	}
+	return t.Left.Min()
+}
+
+// Max - находит максимальный элемент в дереве
+func (t *Tree) Max() int {
+	if t.Right == nil {
+		return t.Value
+	}
+	return t.Right.Max()
+}
+
+// InsertValues - позволяет ввести массив числе в дерево
+func (t *Tree) InsertValues(values []int) *Tree {
+	for v := range values {
+		t = t.InsertValue(values[v])
+	}
+	return t
+}
+
+// func (t *Tree) Remove(v int) *Tree {
+// 	if t == nil || !t.Find(v) {
+// 		return t
+// 	}
+// 	if v < t.Value {
+// 		t.Left = t.Left.Remove(v)
+// 	} else {
+// 		t.Right = t.Right.Remove(v)
+// 	}
+// 	if t.Left != nil && t.Right != nil {
+// 		t.Value = t.Right.Min()
+// 		t.Right = t.Right.Remove(t.Right.Value)
+// 	} else {
+// 		if t.Left != nil {
+// 			t = t.Left
+// 		} else {
+// 			t = t.Right
+// 		}
+// 	}
+// 	return t
+// }
+
 func main() {
-	v := []int{8, 4, 2, 3, 10, 6, 7}
+	v := []int{3, 2, 5, 4}
 	tr := Create()
 	for i := range v {
 		tr = tr.InsertValue(v[i])
 	}
+	tr.InOrdered()
+	fmt.Println()
+	tr.PreOrder()
+	fmt.Println()
+	fmt.Println()
+	fmt.Printf("%v %v\n\n", tr.Min(), tr.Max())
+	// tr = tr.Remove(2)
 	tr.InOrdered()
 }

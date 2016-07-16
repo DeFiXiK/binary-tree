@@ -22,7 +22,7 @@ func TestFound(t *testing.T) {
 	}
 	for i := range v {
 		if !tr.Find(v[i]) {
-			t.Errorf("Значение %v - не найдено", v[i])
+			t.Errorf("Значение %v - не найдено\n", v[i])
 		}
 	}
 }
@@ -31,14 +31,32 @@ func TestInsertValue(t *testing.T) {
 	tree := Create()
 	tree = tree.InsertValue(2)
 	if tree.Value != 2 {
-		t.Errorf("Значение в правом потомке не совпадает ожидалось: %v, получено: %v ", 2, tree.Value)
+		t.Errorf("Значение в правом потомке не совпадает ожидалось: %v, получено: %v\n", 2, tree.Value)
 	}
 	tree = tree.InsertValue(3)
 	if tree.Right.Value != 3 {
-		t.Errorf("Значение в правом потомке не совпадает ожидалось: %v, получено: %v ", 3, tree.Value)
+		t.Errorf("Значение в правом потомке не совпадает ожидалось: %v, получено: %v\n", 3, tree.Value)
 	}
 	tree = tree.InsertValue(1)
 	if tree.Left.Value != 1 {
-		t.Errorf("Значение в правом потомке не совпадает ожидалось: %v, получено: %v ", 1, tree.Value)
+		t.Errorf("Значение в правом потомке не совпадает ожидалось: %v, получено: %v\n", 1, tree.Value)
+	}
+}
+
+func TestMax(t *testing.T) {
+	tree := Create()
+	v := []int{8, 4, 2, 3, 10, 6, 7}
+	tree = tree.InsertValues(v)
+	if tree.Max() != 10 {
+		t.Errorf("Максимальный элемент найден не верно ожидалось: %v, получено: %v\n", 10, tree.Max())
+	}
+}
+
+func TestMin(t *testing.T) {
+	tree := Create()
+	v := []int{8, 4, 2, 3, 10, 6, 7}
+	tree = tree.InsertValues(v)
+	if tree.Min() != 2 {
+		t.Errorf("Минимальный элемент найден не верно ожидалось: %v, получено: %v\n", 5, tree.Min())
 	}
 }
