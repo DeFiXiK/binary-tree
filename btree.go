@@ -89,6 +89,17 @@ func (t *Tree) InsertValues(values []int) *Tree {
 	return t
 }
 
+// Sorted - возвращает значения в узлах дерева отсортированным массивом.
+func (t *Tree) Sorted() (array []int) {
+	if t == nil {
+		return nil
+	}
+	array = append(array, t.Left.Sorted()...)
+	array = append(array, t.Value)
+	array = append(array, t.Right.Sorted()...)
+	return
+}
+
 // func (t *Tree) Remove(v int) *Tree {
 // 	if t == nil || !t.Find(v) {
 // 		return t
