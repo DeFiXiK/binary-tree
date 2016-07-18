@@ -87,3 +87,47 @@ func TestSorted(t *testing.T) {
 		}
 	}
 }
+
+func TestRemove(t *testing.T) {
+	cases := []struct {
+		in     []int
+		remove int
+		sorted []int
+	}{
+		{nil, 1, nil},
+		{
+			[]int{2}, 1,
+			[]int{2},
+		},
+		{
+			[]int{2}, 2,
+			nil,
+		},
+		{
+			[]int{2, 3, 1}, 3,
+			[]int{1, 2},
+		},
+		{
+			[]int{2, 3, 1}, 2,
+			[]int{1, 3},
+		},
+		{
+			[]int{8, 4, 2, 3, 10, 6, 7}, 6,
+			[]int{2, 3, 4, 7, 8, 10},
+		},
+	}
+
+	for _, c := range cases {
+		t.Logf("Кейс %v/%v...", c.in, c.remove)
+
+		tree := Create()
+		tree = tree.InsertValues(c.in)
+		tree = tree.Remove(c.remove)
+		ret := tree.Sorted()
+
+		if !reflect.DeepEqual(ret, c.sorted) {
+			t.Errorf("\tПолучено %v", ret)
+			t.Errorf("\tОжидалось %v", c.sorted)
+		}
+	}
+}

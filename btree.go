@@ -100,27 +100,31 @@ func (t *Tree) Sorted() (array []int) {
 	return
 }
 
-// func (t *Tree) Remove(v int) *Tree {
-// 	if t == nil || !t.Find(v) {
-// 		return t
-// 	}
-// 	if v < t.Value {
-// 		t.Left = t.Left.Remove(v)
-// 	} else {
-// 		t.Right = t.Right.Remove(v)
-// 	}
-// 	if t.Left != nil && t.Right != nil {
-// 		t.Value = t.Right.Min()
-// 		t.Right = t.Right.Remove(t.Right.Value)
-// 	} else {
-// 		if t.Left != nil {
-// 			t = t.Left
-// 		} else {
-// 			t = t.Right
-// 		}
-// 	}
-// 	return t
-// }
+// Remove - удаляет значение из дерева.
+func (t *Tree) Remove(v int) *Tree {
+	if t == nil || !t.Find(v) {
+		return t
+	}
+
+	if v < t.Value {
+		t.Left = t.Left.Remove(v)
+		return t
+	} else if v > t.Value {
+		t.Right = t.Right.Remove(v)
+		return t
+	}
+
+	// Then v == t.Value
+	if t.Left != nil && t.Right != nil {
+		t.Value = t.Right.Min()
+		t.Right = t.Right.Remove(t.Value)
+	} else if t.Left != nil {
+		t = t.Left
+	} else {
+		t = t.Right
+	}
+	return t
+}
 
 func main() {
 	v := []int{3, 2, 5, 4}
