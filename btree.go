@@ -65,7 +65,7 @@ func (t *Tree) PreOrder() {
 	t.Right.PreOrder()
 }
 
-// Min - находит минимальный элемент в дереве
+// Min - находит минимальный элемент в дереве.
 func (t *Tree) Min() int {
 	if t.Left == nil {
 		return t.Value
@@ -73,7 +73,7 @@ func (t *Tree) Min() int {
 	return t.Left.Min()
 }
 
-// Max - находит максимальный элемент в дереве
+// Max - находит максимальный элемент в дереве.
 func (t *Tree) Max() int {
 	if t.Right == nil {
 		return t.Value
@@ -81,7 +81,7 @@ func (t *Tree) Max() int {
 	return t.Right.Max()
 }
 
-// InsertValues - позволяет ввести массив числе в дерево
+// InsertValues - позволяет ввести массив числе в дерево.
 func (t *Tree) InsertValues(values []int) *Tree {
 	for v := range values {
 		t = t.InsertValue(values[v])
@@ -124,20 +124,4 @@ func (t *Tree) Remove(v int) *Tree {
 		t = t.Right
 	}
 	return t
-}
-
-func main() {
-	v := []int{3, 2, 5, 4}
-	tr := Create()
-	for i := range v {
-		tr = tr.InsertValue(v[i])
-	}
-	tr.InOrdered()
-	fmt.Println()
-	tr.PreOrder()
-	fmt.Println()
-	fmt.Println()
-	fmt.Printf("%v %v\n\n", tr.Min(), tr.Max())
-	// tr = tr.Remove(2)
-	tr.InOrdered()
 }
